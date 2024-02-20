@@ -72,7 +72,12 @@ from tblComputer
         connect by prior seq = pseq --현재 레코드와 부모 레코드를 연결하는 조건
             order siblings by name asc;     --siblings > 같은 형제끼리    
         
-        
+
+select
+    lpad(' ', (level - 1) * 2) || name as 직원명
+from tblSelf
+    start with super is null
+        connect by super = prior seq;
         
         
         
