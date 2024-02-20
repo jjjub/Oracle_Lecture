@@ -1,5 +1,5 @@
 -- ### join ###################################
-
+-- jobs <-> employees <-> departments <-> locations <-> coutries <->
 
 -- 1. tblStaff, tblProject. 현재 재직중인 모든 직원의 이름, 주소, 월급, 담당프로젝트명을 가져오시오.
        

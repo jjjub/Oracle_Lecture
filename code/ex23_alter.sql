@@ -104,20 +104,52 @@ alter table tblEdit
     modify (컬럼정의);
 
 alter table tblEdit 
-    modify (data varchar2(50));
+    modify (data varchar2(100)); --확장
 
+desc tblEdit;
+
+alter table tblEdit 
+    modify (data varchar2(20)); --축소
+
+-- Case 3.2 컬럼의 제약사항 수정하기(not null)
+alter table tblEdit
+    modify (data varchar2(100) null);
+
+alter table tblEdit
+    modify (data varchar2(100) not null);
+
+alter table tblEdit
+    modify (data varchar2(100) unique);
+
+--Case 3.3  컬럼 자료형 바꾸기
+alter table tblEdit
+    modify (data number);
+
+delete from tblEdit;
+
+
+--Case 4. 제약 사항 조작
+drop table tblEdit;
+
+create table tblEdit (
+    seq number,
+    data varchar2(20)
+);
+
+alter table tblEdit
+    add constraint tbledit_seq_pk primary key(seq);
+
+alter table tblEdit
+    add constraint tbledit_data_uq unique(data);
+
+alter table tblEdit
+    drop constraint tbledit_data_uq;
+    
+insert into tblEdit values(1, '강아지');
+insert into tblEdit values(2, '고양이');
+insert into tblEdit values(3, '고양이');
+insert into tblEdit values(4, null);
+
+desc tblEdit;
 
 select * from tblEdit;
-
-
-
-
-
-
-
-
-
-
-
-
-

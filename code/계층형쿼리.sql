@@ -38,6 +38,7 @@ insert into tblComputer values (7, '메모리', 2, 2);
 insert into tblComputer values (8, '모니터', 1, 1);
 insert into tblComputer values (9, '보호필름', 1, 8);
 insert into tblComputer values (10, '모니터암', 1, 8);
+insert into tblComputer values (14, '모니터클리너', 1, 8);
 
 insert into tblComputer values (11, '프린터', 1, 1);
 insert into tblComputer values (12, 'A4용지', 100, 11);
