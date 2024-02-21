@@ -25,7 +25,13 @@
             - 밀키트
             - 베이커리
             - 도시락
+/*
 
+    자기 참조 테이블(계층형 쿼리 사용) 유무
+    - depth 고정 > 사용 X or O
+    - depth 미정 > 사용 O
+
+*/
 insert into tblComputer values (1, '컴퓨터', 1, null);
 
 insert into tblComputer values (2, '본체', 1, 1);

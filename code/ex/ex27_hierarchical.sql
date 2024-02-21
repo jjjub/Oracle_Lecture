@@ -79,8 +79,32 @@ from tblSelf
     start with super is null
         connect by super = prior seq;
         
-        
-        
-        
 
+--카테고리
+create table tblCategoryBig (
+    seq number primary key,
+    name varchar2(100) not null
+);
 
+create table tblCategoryMedium (
+    seq number primary key,
+    name varchar2(100) not null,
+    pseq number not null references tblCategoryBig(seq)
+);
+
+create table tblCategorySmall(
+    seq number primary key,
+    name varchar2(100) not null,
+    pseq number not null references tblCategoryMedium(seq)
+);           
+
+--모든 부모가 모든 자식과 연결되어있으면 inner, outer join 동일한 결과값 출력
+select
+    b.name as 상,
+    m.name as 중,
+    s.name as 하
+from tblCategoryBig B
+    inner join tblCategoryMedium m
+        on b.seq = m.pseq
+            inner join tblCategorySmall s
+                on m.seq = s.pseq;

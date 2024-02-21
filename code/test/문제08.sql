@@ -2,10 +2,14 @@
 -- jobs <-> employees <-> departments <-> locations <-> coutries <->
 
 -- 1. tblStaff, tblProject. 현재 재직중인 모든 직원의 이름, 주소, 월급, 담당프로젝트명을 가져오시오.
-       
-       
+select 
+s.name, s.address, s.salary, p.project
+from tblStaff s
+    inner join tblProject p
+        on p.staff_seq = s.seq;
+        
 -- 2. tblVideo, tblRent, tblMember. '뽀뽀할까요' 라는 비디오를 빌려간 회원의 이름은?
-    
+
     
 -- 3. tblStaff, tblProejct. 'TV 광고'을 담당한 직원의 월급은 얼마인가?
     
