@@ -9,8 +9,13 @@ from tblStaff s
         on p.staff_seq = s.seq;
         
 -- 2. tblVideo, tblRent, tblMember. '뽀뽀할까요' 라는 비디오를 빌려간 회원의 이름은?
-
-    
+select
+m.name
+from tblMember m
+    inner join tblRent r
+        on m.seq = r.member
+            inner join tblVideo v
+                on r.video = v.seq and v.name ='뽀뽀할까요';
 -- 3. tblStaff, tblProejct. 'TV 광고'을 담당한 직원의 월급은 얼마인가?
     
     
