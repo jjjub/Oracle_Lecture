@@ -1511,3 +1511,123 @@ select * from tblStaff;
 delete from tblStaff where seq = 1;
 rollback;
 
+--회원 테이블, 게시판 테이블
+--포인트 정책
+--1. 글 작성 > 포인트+ 100
+--2. 글 삭제 > 포인트 - 50
+
+create table tblUser(
+    id varchar2(30),
+    point number not null
+);
+
+alter table tblUser 
+    add constraint tbluser_id_pk primary key(id);
+
+create table tblBoard(
+    seq number,
+    subject varchar2(2000) not null,
+    id varchar2(30) not null
+);
+alter table tblBoard
+    add constraint tblboard_seq_pk primary key(seq);
+    
+alter table tblBoard
+    ADD CONSTRAINT tblboard_id_fk 
+        foreign key(id) references tblUser(id);
+
+create sequence seqBoard;
+
+desc tblBoard;
+
+
+insert into tblUser values ('hong', 1000);
+drop table tblBoard;
+
+--1.1 글쓰기
+insert into tblBoard values (seqBoard.nextVal, '게시판입니다.', 'hong');
+
+--1.2 포인트 누적하기
+update tblUser set point = point + 100 where id = 'hong';
+
+--1.3 글삭제하기
+delete from tblBoard where seq = 2;
+
+--1.4 포인트 차감하기
+update tblUser set point = point - 50 where id = 'hong';
+
+
+select * from tblUser;
+select * from tblBoard;
+
+
+--Case 2. 프로시저
+create or replace procedure procAddBoard(
+    pid varchar2,
+    psubject varchar2
+)
+is
+begin
+    insert into tblBoard values (seqBoard.nextVal, psubject, pid);
+    update tblUser set point = point + 100 where id = pid;
+end procAddBoard;
+/
+
+
+create or replace procedure procDeleteBoard(
+    pseq number
+)
+is
+    vid tblUser.id%type;
+begin
+    select id into vid from tblBoard where seq = pseq;
+    delete from tblBoard where seq = pseq;
+    update tblUser set point = point - 50 where id = vid;
+end procDeleteBoard;
+/
+
+begin
+    --procAddBoard('hong', '안녕하세요.');
+     procDeleteBoard(3);
+end;
+/
+
+
+
+--Case 3. 트리거
+create or replace trigger trgBoard
+    after
+    insert or delete
+    on tblBoard
+    for each row
+begin
+    
+    if inserting then
+        update tblUser set point = point + 100 where id  = :new.id;
+    elsif deleting then
+        update tblUser set point = point - 50 where id  = :old.id;
+    end if;
+    
+end trgBoard;
+/
+
+insert into tblBoard values (seqBoard.nextVal, '금요일입니다.', 'hong');
+
+delete from tblBoard where seq = 5;
+
+select * from tblUser;
+select * from tblBoard;
+
+
+
+
+
+
+
+
+
+
+
+
+select * from tblUser;
+select * from tblBoard;

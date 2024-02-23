@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="solutionSelectionDialog">
-		<item value="0" key="applyScope"/>
+		<item value="1" key="applyScope"/>
 	</section>
 	<section name="solution">
 	</section>

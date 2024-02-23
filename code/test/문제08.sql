@@ -17,10 +17,11 @@ from tblMember m
             inner join tblVideo v
                 on r.video = v.seq and v.name ='뽀뽀할까요';
 -- 3. tblStaff, tblProejct. 'TV 광고'을 담당한 직원의 월급은 얼마인가?
-    
+select s.salary from tblStaff s inner join tblProject p on s.seq = p.staff_seq and p.project = 'TV 광고';
     
 -- 4. tblVideo, tblRent, tblMember. '털미네이터' 비디오를 한번이라도 빌려갔던 회원들의 이름은?
 
+select m.name from tblMember m inner join tblrent r on m.seq = r.member inner join tblvideo v on r.video = v.seq and v.name ='털미네이터';
                 
 -- 5. tblStaff, tblProject. 서울시에 사는 직원을 제외한 나머지 직원들의 이름, 월급, 담당프로젝트명을 가져오시오.
     
